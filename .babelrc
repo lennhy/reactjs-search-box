@@ -1,0 +1,12 @@
+/*
+REFERENCE:
+    https://babeljs.io/docs/plugins/preset-env/
+    https://babeljs.io/docs/plugins/preset-react/
+*/
+{
+    "presets": [
+        "env",
+        "stage-2",
+        "react"
+    ]
+}

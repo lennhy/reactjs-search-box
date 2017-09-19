@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+html,
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif
+}
+
+.search-box {
+    display: inline-table;
+    padding: 5px;
+}
+
+.search-box .search-box_label {
+    display: table-cell;
+    padding-right: 5px;
+}
+
+.search-box .search-box_content {
+    
+}
+
+.search-box .search-box_input {
+    line-height: 30px;
+    font-size: 100%;
+    border: 1px solid #9554e9;
+    border-radius: 4px;
+}

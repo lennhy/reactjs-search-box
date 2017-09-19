@@ -1,0 +1,49 @@
+{
+  "name": "reactjs-search-box",
+  "version": "1.0.0",
+  "description": "Search box using reactjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.js --devtool=source-map --progress --color --watch",
+    "build": "webpack --config webpack.config.js --progress --color --display-error-details",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lequangphuong/reactjs-search-box.git"
+  },
+  "keywords": [
+    "search",
+    "box",
+    "autocomplete",
+    "react",
+    "reactjs"
+  ],
+  "author": "lequangphuong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lequangphuong/reactjs-search-box/issues"
+  },
+  "homepage": "https://github.com/lequangphuong/reactjs-search-box#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-plugin-transform-imports": "^1.4.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack-dev-server": "^2.8.2"
+  }
+}
