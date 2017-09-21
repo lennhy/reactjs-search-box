@@ -3,9 +3,14 @@ Search box using reactjs
 
 ## Installation
 
+import ReactJsSearchBox from 'reactjs-search-box';
 
 ## Usage
 
+    - Step 1: Include this on loader module 
+    - Step 2: 
+        <ReactJsSearchBox ref={ref => this.reactJsSearchBox = ref}
+                options={{ label: '', placeHolder: 'search' }} />
 
 ## Tests
 
