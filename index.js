@@ -1,1 +1,1 @@
-module.exports = require('.src/reactjs-search-box');
+module.exports = require('./src/reactjs-search-box');

@@ -1,7 +1,7 @@
 import React from 'react'
 import expect from 'expect'
 import { mount } from 'enzyme'
-import SearchBox from '../src/reactjs-search-box'
+import SearchBox from '../index'
 
 const wrapper = mount(<SearchBox />)
 
