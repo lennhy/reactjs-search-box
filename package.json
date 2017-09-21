@@ -1,6 +1,6 @@
 {
   "name": "reactjs-search-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Search box autocomplete using reactjs",
   "main": "index.js",
   "scripts": {
