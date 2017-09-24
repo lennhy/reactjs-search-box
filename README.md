@@ -14,7 +14,14 @@ import ReactJsSearchBox from 'reactjs-search-box';
 
 ## Tests
 
+  npm install
   npm test
+
+## Deverlopment
+
+  npm install
+  npm run build:dev
+  open http://localhost:6996
 
 ## Contributing
 
@@ -24,6 +31,7 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ## Release History
 
 * 1.0.0 Initial release
+* 1.1.0 Test, example, built
 
 
 <!-- # [DEMO](https://cdn.rawgit.com/lequangphuong/reactjs-search-box/9ee1c807/dist/index.html)  -->

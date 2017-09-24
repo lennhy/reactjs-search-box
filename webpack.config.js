@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/reactjs-search-box',
+    entry: './src/example.js',
     output: {
-        path: path.resolve(__dirname, 'built'),
-        filename: 'reactjs-search-box.js'
+        path: path.resolve(__dirname, 'example'),
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -18,5 +18,10 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             }
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "example"),
+        compress: true,
+        port: 6996
     }
 }
