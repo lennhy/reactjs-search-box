@@ -1,10 +1,11 @@
 {
   "name": "reactjs-search-box",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Search box autocomplete using reactjs",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build:pro": "./node_modules/.bin/babel src --out-dir built --copy-files",
+    "build:dev": "webpack --watch --config webpack.config.js",
     "test": "mocha --reporter nyan __test__/setup.js \"__test__/*.spec.js\""
   },
   "repository": {
@@ -29,8 +30,10 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.1.2",
     "css-loader": "^0.28.7",
     "enzyme": "^2.9.1",
     "expect": "^21.1.0",
