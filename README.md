@@ -32,6 +32,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 * 1.0.0 Initial release
 * 1.1.0 Test, example, built
+* 1.1.1 Search with local datas 
+  - Initial component with local datas
+  - Open match result with text input search
+  - Example css for demo
 
 
 <!-- # [DEMO](https://cdn.rawgit.com/lequangphuong/reactjs-search-box/9ee1c807/dist/index.html)  -->
