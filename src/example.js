@@ -30,23 +30,32 @@ export default class App extends Component {
     }
     render() {
         return (
-            <ReactJsSearchBox ref={ref => this.searchBox = ref}
-                live={false}
-                datas={this.state.dataList}
-                api={{
-                    url: '',
-                    method: 'GET'
-                }}
-                action={{
-                    selectItem: this.selectItem.bind(this)
-                }} />
+            <div className="content">
+                <ReactJsSearchBox ref={ref => this.searchBox = ref}
+                    options={{
+                        label: 'Find',
+                        placeHolder: 'Search'
+                    }}
+                    live={false}
+                    datas={this.state.dataList}
+                    api={{
+                        url: '',
+                        method: 'GET'
+                    }}
+                    action={{
+                        selectItem: this.selectItem.bind(this)
+                    }} />
+                <div className="result-selected">
+                    Selected: <span ref={ref => this.resultSelected = ref}></span>
+                </div>
+            </div>
         );
     }
     componentDidMount() {
         this.searchBox.focus();
     }
     selectItem(item) {
-        console.log(item);
+        this.resultSelected.innerText = item.name;
     }
 }
 

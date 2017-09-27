@@ -15,3 +15,7 @@ html, body {
 .search-box {
     text-align: left;
 }
+
+.result-selected {
+    display: inline-block;    
+}

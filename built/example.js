@@ -66,18 +66,34 @@ var App = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            return _react2.default.createElement(_reactjsSearchBox2.default, { ref: function ref(_ref) {
-                    return _this2.searchBox = _ref;
-                },
-                live: false,
-                datas: this.state.dataList,
-                api: {
-                    url: '',
-                    method: 'GET'
-                },
-                action: {
-                    selectItem: this.selectItem.bind(this)
-                } });
+            return _react2.default.createElement(
+                'div',
+                { className: 'content' },
+                _react2.default.createElement(_reactjsSearchBox2.default, { ref: function ref(_ref) {
+                        return _this2.searchBox = _ref;
+                    },
+                    options: {
+                        label: 'Find',
+                        placeHolder: 'Search'
+                    },
+                    live: false,
+                    datas: this.state.dataList,
+                    api: {
+                        url: '',
+                        method: 'GET'
+                    },
+                    action: {
+                        selectItem: this.selectItem.bind(this)
+                    } }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'result-selected' },
+                    'Selected: ',
+                    _react2.default.createElement('span', { ref: function ref(_ref2) {
+                            return _this2.resultSelected = _ref2;
+                        } })
+                )
+            );
         }
     }, {
         key: 'componentDidMount',
@@ -87,7 +103,7 @@ var App = function (_Component) {
     }, {
         key: 'selectItem',
         value: function selectItem(item) {
-            console.log(item);
+            this.resultSelected.innerText = item.name;
         }
     }]);
 

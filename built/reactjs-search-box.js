@@ -98,9 +98,7 @@ var SearchBox = function (_Component) {
         value: function onChange(event) {
             var value = event.target.value;
             var isEmpty = value === '';
-            var filterDatas = this.props.datas.filter(function (data) {
-                return data.name.toUpperCase().indexOf(value.toUpperCase()) !== -1;
-            });
+            var filterDatas = this.__filterDatas(this.props.datas, value);
             this.setState({ valueInput: value, openDropdown: !isEmpty, datas: isEmpty ? this.props.datas : filterDatas });
         }
     }, {
@@ -132,8 +130,8 @@ var SearchBox = function (_Component) {
                 return _react2.default.createElement(
                     'li',
                     { key: data.id,
-                        className: (0, _classnames2.default)(DEFAULT.className + '_item', { 'selected': true }, { 'disable': true }, { 'hidden': true }),
-                        onClick: _this3.__selectItem.bind(data) },
+                        className: (0, _classnames2.default)(DEFAULT.className + '_item', { 'selected': data.selected }, { 'disable': data.disable }, { 'hidden': data.hidden }),
+                        onClick: _this3.__selectItem.bind(_this3, data) },
                     data.name
                 );
             });
@@ -144,6 +142,21 @@ var SearchBox = function (_Component) {
         value: function __selectItem(item) {
             // @TODO: do something if want check item before call props function
             this.props.action.selectItem(item);
+            // set style to item selected {class: 'selected'}
+            // merge props.datas vs state.datas
+            var datasWithSelectedItem = this.props.datas;
+            datasWithSelectedItem.forEach(function (data, index, datas) {
+                datas[index].selected = data.id === item.id;
+            });
+            var datasWithSelectedItemAndFilter = this.__filterDatas(datasWithSelectedItem, this.state.valueInput);
+            this.setState({ datas: datasWithSelectedItemAndFilter });
+        }
+    }, {
+        key: '__filterDatas',
+        value: function __filterDatas(oldData, value) {
+            return oldData.filter(function (data) {
+                return data.name.toUpperCase().indexOf(value.toUpperCase()) !== -1;
+            });
         }
     }, {
         key: '__eventListener',

@@ -45,7 +45,7 @@ export default class SearchBox extends Component {
     onChange(event) {
         let value = event.target.value;
         let isEmpty = value === '';
-        let filterDatas = this.props.datas.filter(data => data.name.toUpperCase().indexOf(value.toUpperCase()) !== -1)
+        let filterDatas = this.__filterDatas(this.props.datas, value);
         this.setState({ valueInput: value, openDropdown: !isEmpty, datas: isEmpty ? this.props.datas : filterDatas });
     }
     focus() {
@@ -62,15 +62,26 @@ export default class SearchBox extends Component {
         let li = datas.map(data => {
             return <li key={data.id}
                 className={ClassNames(`${DEFAULT.className}_item`,
-                    { 'selected': true }, { 'disable': true },
-                    { 'hidden': true })}
-                onClick={this.__selectItem.bind(data)}>{data.name}</li>
+                    { 'selected': data.selected }, { 'disable': data.disable },
+                    { 'hidden': data.hidden })}
+                onClick={this.__selectItem.bind(this, data)}>{data.name}</li>
         });
         return ul(li);
     }
     __selectItem(item) {
         // @TODO: do something if want check item before call props function
         this.props.action.selectItem(item);
+        // set style to item selected {class: 'selected'}
+        // merge props.datas vs state.datas
+        let datasWithSelectedItem = this.props.datas;
+        datasWithSelectedItem.forEach((data, index, datas) => {
+            datas[index].selected = data.id === item.id;
+        });
+        let datasWithSelectedItemAndFilter = this.__filterDatas(datasWithSelectedItem, this.state.valueInput);
+        this.setState({ datas: datasWithSelectedItemAndFilter });
+    }
+    __filterDatas(oldData, value) {
+        return oldData.filter(data => data.name.toUpperCase().indexOf(value.toUpperCase()) !== -1);
     }
     __eventListener() {
 
