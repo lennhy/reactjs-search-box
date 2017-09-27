@@ -43,7 +43,9 @@ var SearchBox = function (_Component) {
         var _this = _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).call(this, props, context));
 
         _this.state = {
-            valueInput: ''
+            valueInput: '',
+            openDropdown: false,
+            datas: props.datas
         };
         return _this;
     }
@@ -58,7 +60,7 @@ var SearchBox = function (_Component) {
             var options = props.options;
             return _react2.default.createElement(
                 'div',
-                { className: DEFAULT.className },
+                { className: (0, _classnames2.default)(DEFAULT.className, { 'open': state.openDropdown }) },
                 _react2.default.createElement(
                     'span',
                     { className: (0, _classnames2.default)(DEFAULT.className + '_label') },
@@ -72,21 +74,80 @@ var SearchBox = function (_Component) {
                         }, type: 'text',
                         className: (0, _classnames2.default)(DEFAULT.className + '_input'),
                         placeholder: options.placeHolder, value: state.valueInput,
-                        onChange: this.onChange.bind(this) })
+                        onChange: this.onChange.bind(this) }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: (0, _classnames2.default)(DEFAULT.className + '_dropdown') },
+                        props.live ? this.__liveMode(props.api) : this.__localMode(state.datas)
+                    )
                 )
             );
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            // document.addEventListener('click', this.__eventListener, false);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            // document.removeEventListener('click', this.__eventListener, false);
         }
     }, {
         key: 'onChange',
         value: function onChange(event) {
             var value = event.target.value;
-            this.setState({ valueInput: value });
+            var isEmpty = value === '';
+            var filterDatas = this.props.datas.filter(function (data) {
+                return data.name.toUpperCase().indexOf(value.toUpperCase()) !== -1;
+            });
+            this.setState({ valueInput: value, openDropdown: !isEmpty, datas: isEmpty ? this.props.datas : filterDatas });
         }
     }, {
         key: 'focus',
         value: function focus() {
             this.inputSearch.focus();
         }
+    }, {
+        key: '__localMode',
+        value: function __localMode(datas) {
+            return this.__genDropdown(datas);
+        }
+    }, {
+        key: '__liveMode',
+        value: function __liveMode(api) {}
+    }, {
+        key: '__genDropdown',
+        value: function __genDropdown(datas) {
+            var _this3 = this;
+
+            var ul = function ul(li) {
+                return _react2.default.createElement(
+                    'ul',
+                    null,
+                    li
+                );
+            };
+            var li = datas.map(function (data) {
+                return _react2.default.createElement(
+                    'li',
+                    { key: data.id,
+                        className: (0, _classnames2.default)(DEFAULT.className + '_item', { 'selected': true }, { 'disable': true }, { 'hidden': true }),
+                        onClick: _this3.__selectItem.bind(data) },
+                    data.name
+                );
+            });
+            return ul(li);
+        }
+    }, {
+        key: '__selectItem',
+        value: function __selectItem(item) {
+            // @TODO: do something if want check item before call props function
+            this.props.action.selectItem(item);
+        }
+    }, {
+        key: '__eventListener',
+        value: function __eventListener() {}
     }]);
 
     return SearchBox;
@@ -97,8 +158,21 @@ exports.default = SearchBox;
 
 SearchBox.propTypes = {
     options: _propTypes2.default.shape({
-        label: _propTypes2.default.string.isRequired,
-        placeHolder: _propTypes2.default.string.isRequired
+        label: _propTypes2.default.string,
+        placeHolder: _propTypes2.default.string
+    }),
+    live: _propTypes2.default.bool,
+    datas: _propTypes2.default.arrayOf(function (propValue, key, componentName, location, propFullName) {
+        if (typeof propValue[key].id !== 'number' || typeof propValue[key].name !== 'string') {
+            return new Error('Invalid prop `' + propFullName + '` supplied to' + ' `' + componentName + '`. Validation failed.');
+        }
+    }),
+    api: _propTypes2.default.shape({
+        url: _propTypes2.default.string,
+        method: _propTypes2.default.oneOf(['GET', 'POST'])
+    }),
+    action: _propTypes2.default.shape({
+        selectItem: _propTypes2.default.func.isRequired
     })
 };
 
@@ -106,5 +180,14 @@ SearchBox.defaultProps = {
     options: {
         label: '',
         placeHolder: 'Search'
+    },
+    live: false,
+    datas: [{ id: 0, name: 'Default' }],
+    api: {
+        url: false,
+        method: 'GET'
+    },
+    action: {
+        selectItem: function selectItem() {}
     }
 };

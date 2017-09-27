@@ -36,6 +36,6 @@ Add unit tests for any new or changed functionality. Lint and test your code.
   - Initial component with local datas
   - Open match result with text input search
   - Example css for demo
-
+* 1.1.2 Built
 
 <!-- # [DEMO](https://cdn.rawgit.com/lequangphuong/reactjs-search-box/9ee1c807/dist/index.html)  -->
